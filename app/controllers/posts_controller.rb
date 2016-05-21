@@ -17,6 +17,7 @@ before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   # GET /posts/new
   def new
     @post = Post.new
+
   end
 
   # GET /posts/1/edit
@@ -26,7 +27,8 @@ before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+  @post = Post.new(post_params)
+    @post.user_id = current_user.id
 
     respond_to do |format|
       if @post.save
